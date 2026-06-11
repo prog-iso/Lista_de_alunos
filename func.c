@@ -39,13 +39,17 @@ void adiciona_aluno(Aluno* turma, int quant_alunos, int RA)
     printf("\n\tJá sabemos que o RA é: %d", turma[quant_alunos].RA);
     printf("\n\tQual o nome desse(a) aluno(a)? ");
     fgets(turma[quant_alunos].nome, sizeof(turma[quant_alunos].nome), stdin);
-    turma[quant_alunos].nome[strlen[turma[quant_alunos].nome]-1] = '\0';
+    turma[quant_alunos].nome[strlen(turma[quant_alunos].nome)-1] = '\0';
     
-    printf("\tQuais as notas das provas desse(a) aluno(a)?\n");
+    printf("\tQuais as notas das provas desse(a) aluno(a)?\n(lembrando que notas vão de 0.00 a 10.00)\n");
+
     for(int i=0; i<3; i++)
     {
-        printf("\t\tNota da %dº prova: ", i+1);
-        scanf("%f", &turma[quant_alunos].nota[i]);
+        do
+        {
+            printf("\t\tNota da %dº prova: ", i+1);
+            scanf("%f", &turma[quant_alunos].nota[i]);
+        }while(turma[quant_alunos].nota[i]<0 || turma[quant_alunos].nota[i]>10);
     }
     printf("\tPor fim, qual a frequência desse(a) aluno(a)? ");
     scanf("%d", &turma[quant_alunos].freq);
@@ -57,7 +61,7 @@ void adiciona_aluno(Aluno* turma, int quant_alunos, int RA)
 void remove_aluno(Aluno* turma, int pos)
 {
     printf("O aluno %s foi removido.", turma[pos].nome);
-    turma[pos] = turma[pos-1];
+    turma[pos] = turma[pos+1];
     printf("\n\nPara voltar ao menu, aperte enter.");
     getchar();
 }
@@ -65,9 +69,9 @@ void remove_aluno(Aluno* turma, int pos)
 void imprime_turma(Aluno* turma, int quant_alunos)
 {
     printf("Os alunos da turma são:\n");
-    for(inti=0; i<quant_alunos; i++)
+    for(int i=0; i<quant_alunos; i++)
     {
-        printf("\nDados do(a) %dº aluno(a):");
+        printf("\nDados do(a) %dº aluno(a):", i+1);
         printf("\n\tNome: %s", turma[i].nome);
         printf("\n\tRA: %d", turma[i].RA);
         printf("\n\tNotas:");
@@ -78,5 +82,6 @@ void imprime_turma(Aluno* turma, int quant_alunos)
         printf("\b ");
         printf("\n\tFrequência: %d\n", turma[i].freq);
     }
+    printf("\n\nPara voltar ao menu, aperte enter.");
     getchar();
 }

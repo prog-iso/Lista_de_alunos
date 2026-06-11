@@ -13,7 +13,7 @@ int main()
     int quant_alunos = 0;
     Aluno turma[MAX_ALUNOS];
 
-    int escolha = 0;
+    int escolha = 0, RA, pos;
     while (escolha!=5)
     {
         imprime_menu();
@@ -29,18 +29,18 @@ int main()
             if(quant_alunos==MAX_ALUNOS)
             {
                 printf("Desculpa, a turma está lodata.\nSe quiser, pode voltar depois para ver se alguém desistiu.");
-                printf("\n\\Para voltar ao menu, digite enter.");
+                printf("\n\nPara voltar ao menu, digite enter.");
                 getchar();
             }
             else
             {
-                int RA;
-                printf("Primeiro, digite o RA,\npara sabermos se esse(a) aluno(a) já está matriculado(a)");
+                printf("Primeiro, digite o RA, para sabermos\nse esse(a) aluno(a) já está matriculado(a)");
                 printf("\nRA: ");
                 scanf("%d", &RA);
                 printf("\n");
+                getchar();
 
-                int pos = busca_aluno(turma, MAX_ALUNOS, RA);
+                pos = busca_aluno(turma, MAX_ALUNOS, RA);
                 
                 if(pos != -1)
                 {
@@ -51,50 +51,52 @@ int main()
                 else
                 {
                     adiciona_aluno(turma, quant_alunos, RA);
+                    quant_alunos++;
                 }
             }
             
             break;
         
         case 2:
-                int RA;
-                printf("Primeiro, digite o RA,\npara sabermos se esse(a) aluno(a) já está matriculado(a)");
+                printf("Primeiro, digite o RA, para sabermos\nse esse(a) aluno(a) já está matriculado(a)");
                 printf("\nRA: ");
                 scanf("%d", &RA);
                 getchar();
                 printf("\n");
 
-                int pos = busca_aluno(turma, MAX_ALUNOS, RA);
+                pos = busca_aluno(turma, MAX_ALUNOS, RA);
 
             if(pos == -1)
             {
-                printf("Desculpe, ele(a) não estava matriculado(a) nessa turma.\nPor isso, nem pude removê-lo(a).")
+                printf("Desculpe, ele(a) não estava matriculado(a) nessa turma.\nPor isso, nem pude removê-lo(a).");
                 printf("\n\nPara voltar ao menu, aperte enter.");
                 getchar();
             }
             else
-                remove_aluno(turma, pos);
+                {
+                    remove_aluno(turma, pos);
+                    quant_alunos--;
+                }
             
             break;
 
         case 3:
-            int RA;
-                printf("Primeiro, digite o RA,\npara sabermos se esse(a) aluno(a) já está matriculado(a)");
+                printf("Primeiro, digite o RA, para sabermos\nse esse(a) aluno(a) já está matriculado(a)");
                 printf("\nRA: ");
                 scanf("%d", &RA);
                 getchar();
                 printf("\n");
 
-                int pos = busca_aluno(turma, MAX_ALUNOS, RA);
+                pos = busca_aluno(turma, MAX_ALUNOS, RA);
 
             if(pos == -1)
             {
-                printf("Desculpe, ele(a) não estava matriculado(a) nessa turma.")
+                printf("Desculpe, ele(a) não estava matriculado(a) nessa turma.");
             }
             else
             {
                 
-                printf("\nDados do(a) %dº aluno(a):");
+                printf("\nDados do(a) %dº aluno(a):", pos+1);
                 printf("\n\tNome: %s", turma[pos].nome);
                 printf("\n\tRA: %d", turma[pos].RA);
                 printf("\n\tNotas:");
@@ -113,6 +115,9 @@ int main()
         case 4:
             imprime_turma(turma, quant_alunos);
             break;
+
+        case 5:
+        break;
         default:
             printf("Desculpa, essa opção não é válida.\n\nPara voltar ao menu, digite enter.");
             getchar();  
