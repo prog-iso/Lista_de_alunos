@@ -1,0 +1,24 @@
+# Objetos e executáveis
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# Bibliotecas
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Build e diretórios temporários
+build/
+bin/
+Makefile
+
+# IDE e Editor (opcional, conforme uso)
+.vscode/
+.idea/
+*.swp
+~*   
